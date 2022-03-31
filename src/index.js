@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// import {createRoot} from 'react-dom/client';
 // import MyErrorBoundary from './MyErrorBoundary'
 // provides globalized state (store)
 import {configureStore} from '@reduxjs/toolkit';
@@ -10,7 +11,7 @@ import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from 'react-redux';
 
 import todosReducer from './features/todos';
-
+//  root reducer
 const store = configureStore({
   reducer: {
     todos: todosReducer,
@@ -25,6 +26,7 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+// setTimeout(callback, 0)
 
 // STORE = globalized state
 // ACTION = what is going to be happening - function that returns an object

@@ -6,12 +6,22 @@ export const todoSlice = createSlice({
   initialState: [],
   // REDUCERS : functions we call to provide an action to our state
   reducers: {
-    addTodo: (state, action) => {
-      return action.payload
+    setTodo: (state, action) => {
+      return [...action.payload]
       // write code for adding a 'todo'
     }
   }
 })
 
-export const { addTodo } = todoSlice.actions
+// getTodo: async (state, action) => {
+//   const data = await axios
+//       .get('https://shrouded-thicket-78021.herokuapp.com/api/todo')
+//       .then((response) => {
+//         console.log(response.data);
+//         return response.data
+//       })
+//     state.todos = [...state.todos, ...data]
+//   }
+
+export const { setTodo } = todoSlice.actions
 export default todoSlice.reducer
