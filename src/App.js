@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 // change from get Todo
-import {setTodo, addTodo} from './features/todos'
+import {setTodo, addTodo, deleteTodo} from './features/todos'
 
 const App = () => {
 
@@ -33,6 +33,16 @@ const App = () => {
       })
   }
 
+  const handleDelete = (id) => {
+    axios
+      .delete('https://shrouded-thicket-78021.herokuapp.com/api/todo/' + id)
+      .then((response) => {
+        dispatch(deleteTodo(response.data))
+        getTodo()
+      })
+    console.log(deleteTodo);
+  }
+
   useEffect(() => {
     getTodo()
   }, [])
@@ -41,12 +51,12 @@ const App = () => {
       <>
       <div className="App">
 
-        <h1>Hello</h1>
+        <h1>Todo or not Todo</h1>
 
         <div className="addTodo">
           <input type="text" placeholder="title..." onChange={(event) => {setTitle(event.target.value)}}/>
           <input type="text" placeholder="description..." onChange={(event) => {setDescription(event.target.value)}}/>
-          <button onClick={() => handleCreate({title: title, description: description})}></button>
+          <button onClick={() => handleCreate({title: title, description: description})}>ADD</button>
         </div>
 
         <div className="displayTodo">
@@ -55,6 +65,7 @@ const App = () => {
               <div className="todoCard" key={todo.id}>
               <h4>{todo.title}</h4>
               <h5>{todo.description}</h5>
+              <button onClick={() => handleDelete(todo.id)}>DELETE</button>
               </div>
             )
           })}
