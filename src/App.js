@@ -83,18 +83,22 @@ const App = () => {
           {todoList.map((todo) => {
             return (
               <div className="todoCard" key={todo.id}>
-              <h4>{todo.title}</h4>
-              <h5>{todo.description}</h5>
 
-              <label>
-              <input name="title" value={editTodo.title} type="text" placeholder="Edit Title..." onChange={(event) => {handleChange(event)}}/>
+                <div className="nav">
+                  <h4>{todo.title}</h4>
+                  <h5>{todo.description}</h5>
+                </div>
 
-              <input name="description" value={editTodo.description} type="text" placeholder="Edit Description..." onChange={(event) => {handleChange(event)}}/>
+                <div className="todo">
+                  <form>
+                    <input name="title" value={editTodo.title} type="text" placeholder="Edit Title..." onChange={(event) => {handleChange(event)}}/>
+                    <input name="description" value={editTodo.description} type="text" placeholder="Edit Description..." onChange={(event) => {handleChange(event)}} />
+                    <button onClick={() => {handleUpdate(editTodo, todo.id)}}>UPDATE</button>
+                  </form>
+                </div>
 
-              <button onClick={() => {handleUpdate(editTodo, todo.id)}}>UPDATE</button>
-              </label>
+                <button onClick={() => handleDelete(todo.id)}>DELETE</button>
 
-              <button onClick={() => handleDelete(todo.id)}>DELETE</button>
               </div>
             )
           })}
