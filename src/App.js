@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 // change from get Todo
-import {setTodo, addTodo, deleteTodo} from './features/todos'
+import {setTodo, addTodo, deleteTodo, updateTodo} from './features/todos'
 
 const App = () => {
 
@@ -13,7 +13,9 @@ const App = () => {
 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
+  const [editTodo, setEditTodo] = useState({id: '', title: '', description: ''})
 
+// VIEW AND DISPLAY OUR DATA
   const getTodo = () => {
   axios
     .get('https://shrouded-thicket-78021.herokuapp.com/api/todo')
@@ -23,6 +25,7 @@ const App = () => {
     })
   }
 
+// ADD NEW DATA
   const handleCreate = (addNewTodo) => {
     axios
       .post('https://shrouded-thicket-78021.herokuapp.com/api/todo', addNewTodo)
@@ -33,6 +36,7 @@ const App = () => {
       })
   }
 
+// DELETE EXISTING DATA
   const handleDelete = (id) => {
     axios
       .delete('https://shrouded-thicket-78021.herokuapp.com/api/todo/' + id)
@@ -41,6 +45,22 @@ const App = () => {
         getTodo()
       })
     console.log(deleteTodo);
+  }
+
+// UPDATE OR EDIT EXISTING DATA
+  const handleUpdate = (todo, id) => {
+    todo.id = id
+    console.log(todo);
+  axios
+    .put('https://shrouded-thicket-78021.herokuapp.com/api/todo/' + id, todo)
+    .then((response) => {
+      dispatch(updateTodo(response.data))
+      getTodo()
+    })
+}
+
+  const handleChange = (event) => {
+    setEditTodo({...editTodo, [event.target.name] : event.target.value})
   }
 
   useEffect(() => {
@@ -65,6 +85,15 @@ const App = () => {
               <div className="todoCard" key={todo.id}>
               <h4>{todo.title}</h4>
               <h5>{todo.description}</h5>
+
+              <label>
+              <input name="title" value={editTodo.title} type="text" placeholder="Edit Title..." onChange={(event) => {handleChange(event)}}/>
+
+              <input name="description" value={editTodo.description} type="text" placeholder="Edit Description..." onChange={(event) => {handleChange(event)}}/>
+
+              <button onClick={() => {handleUpdate(editTodo, todo.id)}}>UPDATE</button>
+              </label>
+
               <button onClick={() => handleDelete(todo.id)}>DELETE</button>
               </div>
             )
