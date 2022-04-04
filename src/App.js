@@ -5,6 +5,7 @@ import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 // change from get Todo
 import {setTodo, addTodo, deleteTodo, updateTodo} from './features/todos'
+import { RiDeleteBin5Line } from 'react-icons/ri'
 
 const App = () => {
 
@@ -16,6 +17,7 @@ const App = () => {
   const [editTodo, setEditTodo] = useState({id: '', title: '', description: ''})
 // STATE TO TOGGLE EDIT FORM
   const [show, setShow] = useState(false)
+  const [addShow, setAddShow] = useState(false)
 
 // VIEW AND DISPLAY OUR DATA
   const getTodo = () => {
@@ -76,7 +78,9 @@ const App = () => {
 
         <h1>Todo or not Todo</h1>
 
-        <div className="addTodo">
+        <button className="toggle-button" onClick={ () => setAddShow((add) => !add)}>Add Todo</button>
+        <div className="addTodo" style={{ display: addShow ? "block" : "none" }}>
+
           <input type="text" placeholder="title..." onChange={(event) => {setTitle(event.target.value)}}/>
           <input type="text" placeholder="description..." onChange={(event) => {setDescription(event.target.value)}}/>
           <button onClick={() => handleCreate({title: title, description: description})}>ADD</button>
@@ -94,14 +98,14 @@ const App = () => {
 
                 <div className="todo">
 
-                <button onClick={ () => setShow((s) => !s)}>Toggle Edit Form</button>
+                <button onClick={ () => setShow((s) => !s)}>Edit Todo</button>
                   <form style={{ display: show ? "block" : "none" }}>
 
                     <input name="title" value={editTodo.title} type="text" placeholder="Edit Title..." onChange={(event) => {handleChange(event)}}/>
                     <input name="description" value={editTodo.description} type="text" placeholder="Edit Description..." onChange={(event) => {handleChange(event)}} />
                     <button onClick={() => {handleUpdate(editTodo, todo.id)}}>UPDATE</button>
                   </form>
-                  <button onClick={() => handleDelete(todo.id)}>DELETE</button>
+                  <button onClick={() => handleDelete(todo.id)}><RiDeleteBin5Line /></button>
                 </div>
 
               </div>
