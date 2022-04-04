@@ -45,6 +45,10 @@ h1 {
   box-shadow: 0em 0em 1em teal;
 }
 
+#dropdown {
+  display: none;
+}
+
 button {
   border: 2px solid white;
   -webkit-border-radius: 28;

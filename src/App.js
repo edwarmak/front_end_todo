@@ -5,7 +5,6 @@ import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 // change from get Todo
 import {setTodo, addTodo, deleteTodo, updateTodo} from './features/todos'
-import './modals/update'
 
 const App = () => {
 
@@ -15,6 +14,8 @@ const App = () => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [editTodo, setEditTodo] = useState({id: '', title: '', description: ''})
+// STATE TO TOGGLE EDIT FORM
+  const [show, setShow] = useState(false)
 
 // VIEW AND DISPLAY OUR DATA
   const getTodo = () => {
@@ -64,6 +65,7 @@ const App = () => {
     setEditTodo({...editTodo, [event.target.name] : event.target.value})
   }
 
+
   useEffect(() => {
     getTodo()
   }, [])
@@ -91,14 +93,13 @@ const App = () => {
                 </div>
 
                 <div className="todo">
-                  <form id="dropdown">
+
+                <button onClick={ () => setShow((s) => !s)}>Toggle Edit Form</button>
+                  <form style={{ display: show ? "block" : "none" }}>
 
                     <input name="title" value={editTodo.title} type="text" placeholder="Edit Title..." onChange={(event) => {handleChange(event)}}/>
-
                     <input name="description" value={editTodo.description} type="text" placeholder="Edit Description..." onChange={(event) => {handleChange(event)}} />
-
                     <button onClick={() => {handleUpdate(editTodo, todo.id)}}>UPDATE</button>
-
                   </form>
                   <button onClick={() => handleDelete(todo.id)}>DELETE</button>
                 </div>
