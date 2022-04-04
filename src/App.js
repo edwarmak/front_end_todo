@@ -95,9 +95,8 @@ const App = () => {
                     <input name="description" value={editTodo.description} type="text" placeholder="Edit Description..." onChange={(event) => {handleChange(event)}} />
                     <button onClick={() => {handleUpdate(editTodo, todo.id)}}>UPDATE</button>
                   </form>
+                  <button onClick={() => handleDelete(todo.id)}>DELETE</button>
                 </div>
-
-                <button onClick={() => handleDelete(todo.id)}>DELETE</button>
 
               </div>
             )
