@@ -6,7 +6,7 @@ Todo's or not Todo's is an app created to help those with fast paced lives slow 
 ### Frontend
 React / Redux Toolkit
 ##### Frontend Links
-###### Live Site: placeholderlink.com
+###### Live Site: https://voluble-begonia-4ac205.netlify.app/
 ###### Github: https://github.com/edwarmak/front_end_todo
 
 ### Backend
