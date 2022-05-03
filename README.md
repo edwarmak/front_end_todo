@@ -11,15 +11,15 @@ I did face some challenges while completing this project. I ran into issues with
 * Fix an issue with the layout of the edit forms.
 * Implement search bar to view past or current todos.
 
-#### Frontend
+### Frontend
 React / Redux Toolkit
-##### Frontend Links
+
 ###### Live Site: https://voluble-begonia-4ac205.netlify.app/
 ###### Github: https://github.com/edwarmak/front_end_todo
 
-#### Backend
+### Backend
 Django / Python
-##### Backend Links
+
 ###### Live Site: https://shrouded-thicket-78021.herokuapp.com/admin/todo_api/todo/
 ###### Github: https://github.com/edwarmak/backend_todo
 
